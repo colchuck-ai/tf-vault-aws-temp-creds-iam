@@ -1,0 +1,23 @@
+{
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@engineering/npm-dev-tools": "^1.0.0",
+    "@semantic-release/gitlab": "^13.1.0",
+    "husky": "^9.0.11",
+    "prettier": "^3.3.2",
+    "semantic-release": "^24.0.0"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "format": "npm run format:files && npm run format:terraform",
+    "format:files": "prettier --write .",
+    "format:terraform": "terraform fmt -recursive -write",
+    "lint": "npm run lint:files && npm run lint:tflint && npm run lint:terraform",
+    "lint:ci": "npm run lint:files",
+    "lint:files": "prettier --check .",
+    "lint:terraform": "terraform fmt -recursive -check -diff",
+    "lint:tflint": "tflint --init && tflint --recursive",
+    "generate-module-documentation": "./scripts/pre-commit-generate-module-documentation.sh"
+  }
+}
